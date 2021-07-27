@@ -28,7 +28,7 @@ local update_url = "https://raw.githubusercontent.com/les1er/trainingTools/main/
 local update_path = getWorkingDirectory() .. "/update.ini"
 
 local script_url = "https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools.lua"
-local folder_script_url = "https://github.com/les1er/trainingTools/tree/main/Training%20Tools"
+local folder_script_url = "https://github.com/les1er/trainingTools/main/Training%20Tools"
 local script_path = thisScript().path
 
 local sw, sh = getScreenResolution()
