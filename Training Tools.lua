@@ -203,7 +203,6 @@ local font = renderCreateFont("Arial", 7, 4)
 				end
 				sampAddChatMessage(tag .. "{FFFFFF}Скрипт успешно обновлен!", 0xFFFFFFFF)
 				end)
-			end)
 			break
 		end
 
