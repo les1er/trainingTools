@@ -19,7 +19,7 @@ local directIni = "moonloader\\Training Tools\\trainingTools.ini"
 
 local mainIni = inicfg.load(nil, directIni)
 
-if not doesDirectoryExist(getWorkingDirectory() .. 'Training Tools') then
+if not doesDirectoryExist(getWorkingDirectory() .. '/Training Tools') then
 	createDirectory(getWorkingDirectory() .. '/Training Tools')
 	downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/trainingTools.ini", folder_path)
 end
