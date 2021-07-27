@@ -28,7 +28,7 @@ local update_url = "https://raw.githubusercontent.com/les1er/trainingTools/main/
 local update_path = getWorkingDirectory() .. "/update.ini"
 
 local script_url = "https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools.lua"
-local folder_script_url = "https://github.com/les1er/trainingTools/main/Training%20Tools"
+local folder_script_url = "https://github.com/les1er/trainingTools/main/tree/Training%20Tools"
 local script_path = thisScript().path
 
 local sw, sh = getScreenResolution()
@@ -187,10 +187,12 @@ local font = renderCreateFont("Arial", 7, 4)
 			downloadUrlToFile(script_url, script_path, function(id, status)
 				if status == dlstatus.STATUS_ENDDOWNLOADDATA then
 					sampAddChatMessage(tag .. "{FFFFFF}Скрипт успешно обновлен!", 0xFFFFFFFF)
-					downloadUrlToFile(folder_script_url, script_path)
 					update_state = false
 					thisScript():reload()
 				end
+				downloadUrlToFile(folder_script_url, script_path, function(id, status)
+				sampAddChatMessage(tag .. "{FFFFFF}Скрипт успешно обновлен!", 0xFFFFFFFF)
+				end)
 			end)
 			break
 		end
