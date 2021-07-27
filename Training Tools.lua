@@ -19,11 +19,6 @@ local directIni = "moonloader\\Training Tools\\trainingTools.ini"
 
 local mainIni = inicfg.load(nil, directIni)
 
-if not doesDirectoryExist(getWorkingDirectory() .. '/Training Tools') then
-	createDirectory(getWorkingDirectory() .. '/Training Tools')
-	downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/trainingTools.ini", folder_path)
-end
-
 update_state = false
 
 local script_vers = 3
@@ -134,7 +129,9 @@ local font = renderCreateFont("Arial", 7, 4)
 		wait(0)
 
 		if update_state then
-			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/trainingTools.ini", folder_path)
+			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/trainingTools.ini", folder_path, function(id, status)
+				sampAddChatMessage(tag .. "{FFFFFF}Файл настроек скрипта обновлен ...", 0xFFFFFFFF)
+			end)
 			downloadUrlToFile(script_url, script_path, function(id, status)
 				if status == dlstatus.STATUS_ENDDOWNLOADDATA then
 					sampAddChatMessage(tag .. "{FFFFFF}Скрипт успешно обновлен!", 0xFFFFFFFF)
