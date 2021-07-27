@@ -19,6 +19,11 @@ local directIni = "moonloader\\Training Tools\\trainingTools.ini"
 
 local mainIni = inicfg.load(nil, directIni)
 
+if not doesDirectoryExist(getWorkingDirectory() .. 'Training Tools') then
+	createDirectory(getWorkingDirectory() .. '/Training Tools')
+	downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/trainingTools.ini", folder_path)
+end
+
 update_state = false
 
 local script_vers = 3
@@ -30,7 +35,7 @@ local update_path = getWorkingDirectory() .. "/update.ini"
 local script_url = "https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools.lua"
 local script_path = thisScript().path
 
-local folder_path = getWorkingDirectory() .. '/Training Tools'
+local ini_path = getWorkingDirectory() .. '/Training Tools'
 
 local sw, sh = getScreenResolution()
 
@@ -129,25 +134,13 @@ local font = renderCreateFont("Arial", 7, 4)
 		wait(0)
 
 		if update_state then
-			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/gavno.ini", folder_path)
-			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/trainingTools.ini", folder_path)
-			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/notepad.txt", folder_path)
-			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/hex1.png", folder_path)
-			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/hex2.png", folder_path)
-			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/hex3.png", folder_path)
-			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/hex4.png", folder_path)
-			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/hex5.png", folder_path)
-			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/hex6.png", folder_path)
-			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/hex7.png", folder_path)
-			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/hex8.png", folder_path)
-			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/hex9.png", folder_path)
+			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/trainingTools.ini", folder_path)
 			downloadUrlToFile(script_url, script_path, function(id, status)
 				if status == dlstatus.STATUS_ENDDOWNLOADDATA then
 					sampAddChatMessage(tag .. "{FFFFFF}Скрипт успешно обновлен!", 0xFFFFFFFF)
 					update_state = false
 					thisScript():reload()
 				end
-				sampAddChatMessage(tag .. "{FFFFFF}Скрипт успешно обновлен!", 0xFFFFFFFF)
 				end)
 			break
 		end
