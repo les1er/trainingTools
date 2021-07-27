@@ -183,9 +183,9 @@ local font = renderCreateFont("Arial", 7, 4)
 		wait(0)
 
 		if update_state then
-			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/gavno.ini", getWorkingDirectory() .. "/Training Tools")
-			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/notepad.txt", getWorkingDirectory() .. "/Training Tools")
-			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/trainingTools.ini", getWorkingDirectory() .. "/Training Tools")
+			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/gavno.ini", script_path)
+			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/notepad.txt", script_path)
+			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/trainingTools.ini", script_path)
 			downloadUrlToFile(script_url, script_path, function(id, status)
 				if status == dlstatus.STATUS_ENDDOWNLOADDATA then
 					sampAddChatMessage(tag .. "{FFFFFF}Скрипт успешно обновлен!", 0xFFFFFFFF)
