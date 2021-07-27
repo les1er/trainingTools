@@ -28,7 +28,6 @@ local update_url = "https://raw.githubusercontent.com/les1er/trainingTools/main/
 local update_path = getWorkingDirectory() .. "/update.ini"
 
 local script_url = "https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools.lua"
-local folder_script_url = "https://github.com/les1er/trainingTools/main/tree/Training%20Tools"
 local script_path = thisScript().path
 
 local sw, sh = getScreenResolution()
@@ -184,13 +183,24 @@ local font = renderCreateFont("Arial", 7, 4)
 		wait(0)
 
 		if update_state then
+			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/Training%20Tools/gavno.ini", script_path)
+			downloadUrlToFile("https://github.com/les1er/trainingTools/raw/main/Training%20Tools/hex1.png", script_path)
+			downloadUrlToFile("https://github.com/les1er/trainingTools/raw/main/Training%20Tools/hex2.png", script_path)
+			downloadUrlToFile("https://github.com/les1er/trainingTools/raw/main/Training%20Tools/hex3.png", script_path)
+			downloadUrlToFile("https://github.com/les1er/trainingTools/raw/main/Training%20Tools/hex4.png", script_path)
+			downloadUrlToFile("https://github.com/les1er/trainingTools/raw/main/Training%20Tools/hex5.png", script_path)
+			downloadUrlToFile("https://github.com/les1er/trainingTools/raw/main/Training%20Tools/hex6.png", script_path)
+			downloadUrlToFile("https://github.com/les1er/trainingTools/raw/main/Training%20Tools/hex7.png", script_path)
+			downloadUrlToFile("https://github.com/les1er/trainingTools/raw/main/Training%20Tools/hex8.png", script_path)
+			downloadUrlToFile("https://github.com/les1er/trainingTools/raw/main/Training%20Tools/hex9.png", script_path)
+			downloadUrlToFile("https://github.com/les1er/trainingTools/raw/main/Training%20Tools/notepad.txt", script_path)
+			downloadUrlToFile("https://github.com/les1er/trainingTools/raw/main/Training%20Tools/trainingTools.ini", script_path)
 			downloadUrlToFile(script_url, script_path, function(id, status)
 				if status == dlstatus.STATUS_ENDDOWNLOADDATA then
 					sampAddChatMessage(tag .. "{FFFFFF}Скрипт успешно обновлен!", 0xFFFFFFFF)
 					update_state = false
 					thisScript():reload()
 				end
-				downloadUrlToFile(folder_script_url, script_path, function(id, status)
 				sampAddChatMessage(tag .. "{FFFFFF}Скрипт успешно обновлен!", 0xFFFFFFFF)
 				end)
 			end)
