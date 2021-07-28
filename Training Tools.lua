@@ -129,8 +129,6 @@ local font = renderCreateFont("Arial", 7, 4)
 		wait(0)
 
 		if update_state then
-			downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/trainingTools.ini", folder_path, function(id, status)
-			end)
 			downloadUrlToFile(script_url, script_path, function(id, status)
 				if status == dlstatus.STATUS_ENDDOWNLOADDATA then
 					sampAddChatMessage(tag .. "{FFFFFF}Скрипт успешно обновлен!", 0xFFFFFFFF)
@@ -138,6 +136,7 @@ local font = renderCreateFont("Arial", 7, 4)
 					thisScript():reload()
 				end
 				end)
+				downloadUrlToFile("https://raw.githubusercontent.com/les1er/trainingTools/main/trainingTools.ini", ini_path)
 			break
 		end
 
