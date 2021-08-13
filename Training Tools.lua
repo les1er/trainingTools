@@ -539,6 +539,7 @@ function imgui.OnDrawFrame()
 					if status == dlstatus.STATUS_ENDDOWNLOADDATA then
 						updateIni = inicfg.load(nil, update_path)
 						if tonumber(updateIni.info.vers) > script_vers then
+							imgui.ShowCursor = false
 							sampAddChatMessage(tag .. "{FFFFFF}Доступна новая версия скрипта: {80BCFF}" .. updateIni.info.vers_text .. ".0{FFFFFF}!", 0xFFFFFFFF)
 							update_state = true
 						else
