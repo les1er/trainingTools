@@ -117,14 +117,15 @@ local font = renderCreateFont("Arial", 7, 4)
 	while true do
 		wait(0)
 
-		downloadUrlToFile(script_url, script_path, function(id, status)
-				if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-					sampAddChatMessage(tag .. "{FFFFFF}Скрипт успешно обновлен!", 0xFFFFFFFF)
-					thisScript():reload()
-				end
-		end)
-		break
-	end
+		if update_state == true then
+			downloadUrlToFile(script_url, script_path, function(id, status)
+					if status == dlstatus.STATUS_ENDDOWNLOADDATA then
+						sampAddChatMessage(tag .. "{FFFFFF}Скрипт успешно обновлен!", 0xFFFFFFFF)
+						thisScript():reload()
+					end
+				end)
+			break
+		end
 
 		imgui.Process = main_window_state.v
 
@@ -541,9 +542,9 @@ function imgui.OnDrawFrame()
 							sampAddChatMessage(tag .. "{FFFFFF}Доступна новая версия скрипта: {80BCFF}" .. updateIni.info.vers_text .. ".0{FFFFFF}!", 0xFFFFFFFF)
 							update_state = true
 						else
-						os.remove(upate_path)
 						sampAddChatMessage(tag .. "{FFFFFF}Установлена последняя версия скрипта, обновление не требуется.", 0xFFFFFFFF)
 						end
+						os.remove(upate_path)
 					end
 			end)
 		end
