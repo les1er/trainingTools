@@ -544,7 +544,7 @@ function imgui.OnDrawFrame()
 						else
 						sampAddChatMessage(tag .. "{FFFFFF}”становлена последн€€ верси€ скрипта, обновление не требуетс€.", 0xFFFFFFFF)
 						end
-						os.remove(uppate_path)
+						os.remove(update_path)
 					end
 			end)
 		end
