@@ -23,13 +23,32 @@ local tag = "{FFA500}[TRAINING TOOLS]: "
 local inicfg = require "inicfg"
 
 local directIni = "moonloader\\Training Tools\\trainingTools.ini"
-
-local mainIni = inicfg.load(nil, directIni)
+local mainIni = inicfg.load(inicfg.load({
+		tools = {
+			line6 =  ,
+			autoRetention = false,
+			line7 =  ,
+			line8 =  ,
+			objectDispTraser = false,
+			line9 =  ,
+			line1 =  ,
+			line2 =  ,
+			theme = 1,
+			autoRetentionVIP = false,
+			line10 =  ,
+			line3 =  ,
+			line4 =  ,
+			animLib = false,
+			line5 =  ,
+			objectDisp = false
+		},
+}, directIni))
+inicfg.save(mainIni, directIni)
 
 update_state = false
 
 local script_vers = 4
-local script_vers_text = "3.0"
+local script_vers_text = "3.5"
 
 local update_url = "https://raw.githubusercontent.com/les1er/trainingTools/main/update.ini"
 local update_path = getWorkingDirectory() .. "/update.ini"
@@ -159,6 +178,23 @@ function sampev.onApplyPlayerAnimation(playerId, animLib, animName, loop, lockX,
  end
 end
 
+function sampev.onShowDialog(dialogId, style, title, button1, button2, text)
+	if mainIni.tools.autoRetention == true then
+		if mainIni.tools.autoRetentionVIP == true then
+			if string.find(text, ' - Время удержания мира	[ 30с. ]', 1, true) then
+				sampSendDialogResponse(32700, 1, 17, "")
+				sampSendDialogResponse(32700, 1, -1, "300")
+			end
+		elseif mainIni.tools.autoRetentionVIP == false then
+			if string.find(text, ' - Время удержания мира	[ 30с. ]', 1, true) then
+				sampSendDialogResponse(32700, 1, 17, "")
+				sampSendDialogResponse(32700, 1, -1, "150")
+			end
+		end
+	end
+end
+
+
 function imgui.NewInputText(lable, val, width, hint, hintpos)
   local hint = hint and hint or ''
   local hintpos = tonumber(hintpos) and tonumber(hintpos) or 1
@@ -180,6 +216,8 @@ local animLib_check = imgui.ImBool(mainIni.tools.animLib)
 local object_disp = imgui.ImBool(mainIni.tools.objectDisp)
 local object_disp_traser = imgui.ImBool(mainIni.tools.objectDispTraser)
 local theme_select = imgui.ImInt(mainIni.tools.theme)
+local auto_retention = imgui.ImBool(mainIni.tools.autoRetention)
+local auto_retentionVIP = imgui.ImBool(mainIni.tools.autoRetentionVIP)
 
 function imgui.TextCenter(text)
   local textSize = imgui.CalcTextSize(text)
@@ -475,6 +513,24 @@ function imgui.OnDrawFrame()
 			end
 		imgui.EndPopup()
 		end
+		imgui.SameLine()
+		if imgui.Button(fa.ICON_COG .. u8" Мировой помощник", imgui.ImVec2(150, 25)) then imgui.OpenPopup(u8'world_tools') end
+		if imgui.BeginPopupModal(u8'world_tools', true, imgui.WindowFlags.NoTitleBar + imgui.WindowFlags.NoResize + imgui.WindowFlags.NoMove) then
+			if imgui.Button(u8"Закрыть окно", imgui.ImVec2((sw / 2), 25)) then
+				imgui.CloseCurrentPopup()
+			end
+			imgui.Checkbox(u8"Авто удержание при создании мира", auto_retention)
+			if auto_retention then
+			imgui.SameLine()
+			imgui.Checkbox(u8"VIP статус", auto_retentionVIP)
+			end
+
+			mainIni.tools.autoRetention = auto_retention.v
+			mainIni.tools.autoRetentionVIP = auto_retentionVIP.v
+
+			inicfg.save(mainIni, directIni)
+		imgui.EndPopup()
+	end
 		imgui.Spacing()
 		imgui.Spacing()
 		if imgui.Button(fa.ICON_CUBE .. u8" Dev Prineside", imgui.ImVec2(150, 25)) then
